@@ -1,7 +1,6 @@
 import {URL} from "../apis/back";
 
 export const editRequest = ({firstName, lastName,}, id) => {
-    console.log(firstName, lastName, id)
     return URL.put(
         `/v1/users/${id}`,
         {

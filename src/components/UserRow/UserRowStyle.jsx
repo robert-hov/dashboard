@@ -33,7 +33,7 @@ export const StyledUserMail = styled.div`
   flex-shrink: 0;
 `
 
-export const StyledUserBirthYear = styled.div`
+export const StyledUserRole = styled.div`
   width: 21.135%;
   flex-shrink: 0;
 `

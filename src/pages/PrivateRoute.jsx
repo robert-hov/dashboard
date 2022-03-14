@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: RouteComponent, location, ...rest }) => {
-    console.log(123)
     const expireDate = localStorage.getItem('accessTokenExpiresAt');
     const now = new Date().getTime();
     let isTokenExpired;

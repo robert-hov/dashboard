@@ -39,17 +39,6 @@ const UserBoard = () => {
             <StyledUserBoard>
                 <UserRow header/>
                 {RendList}
-                <button onClick={() => {
-                    history.push('/login')
-                    localStorage.clear()
-                }}>
-                    log out
-                </button>
-                <button onClick={() => {
-                    console.log(staffList)
-                }}>
-                    get users
-                </button>
             </StyledUserBoard>
             {activePopup && (
                 <EditPopup cancelClick={cancelClickHandler} active={activeId}/>
