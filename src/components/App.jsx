@@ -10,6 +10,7 @@ import colors from "../utils/theme";
 import UserBoard from "../pages/UsersBoard/UserBoard";
 import PrivateRoute from "../pages/PrivateRoute";
 import PublicRoute from "../pages/PublicRoute";
+import Header from "./Header/Header";
 
 const StyledLayout = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const App = () => {
     return (
         <StyledLayout>
             <Router>
-                <Switch>
+                <PrivateRoute>
                     <PublicRoute exact path="/login">
                         <Switch>
                             <Route path="/login">
@@ -32,11 +33,11 @@ const App = () => {
                             </Route>
                         </Switch>
                     </PublicRoute>
-                    {/*<Route path="*">*/}
-                    {/*    <div>404 NOT FOUND</div>*/}
-                    {/*</Route>*/}
-                    <PrivateRoute path="/dashboard" component={() => <UserBoard/>}/>
-                </Switch>
+                    <Header />
+                    <Route path="/dashboard">
+                        <UserBoard/>
+                    </Route>
+                </PrivateRoute>
             </Router>
         </StyledLayout>
     )

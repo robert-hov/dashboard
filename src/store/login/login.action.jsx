@@ -1,31 +1,13 @@
-import AuthService from "../../services/AuthService";
-import UserService from "../../services/UserService";
+import {loginRequest} from "../../services/AuthService";
 
-export const login = (dispatch, form) => {
-    AuthService.login(form).then(({status, data}) => {
-        if (AuthService.isOkStatus(status)) {
-            localStorage.setItem("token", data.accessToken);
-            localStorage.setItem(
-                "accessTokenExpiresAt",
-                data.accessTokenExpiresAt
-            );
-            getUser(dispatch);
-        } else {
-            return new Error("username or/and password is not correct");
-        }
-    })
+export const login = async (dispatch, form) => {
+    const res = await loginRequest(form)
+    const status = res.status;
+    const data = res.data;
+    if (status === 201) {
+        localStorage.setItem("token", data.accessToken);
+        localStorage.setItem("accessTokenExpiresAt", data.accessTokenExpiresAt);
+    } else {
+        return new Error("username or/and password is not correct");
+    }
 }
-
-export const getUser = (dispatch) => {
-    UserService.getCurrentUser().then((res) => {
-        const {status, json} = res;
-
-        if (UserService.isOkStatus(status)) {
-            localStorage.setItem("user", JSON.stringify(json));
-            dispatch({
-                type: "SET_USER",
-                user: json,
-            });
-        }
-    });
-};

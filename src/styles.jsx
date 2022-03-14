@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
   *::after {
     box-sizing: inherit;
   }
+  
+  #root {
+    position: relative;
+  }
 
   .container {
     width: 85.651%;

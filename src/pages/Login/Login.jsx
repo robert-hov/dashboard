@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import StyledButton from "../../components/globalComponents/Button";
 import colors from "../../utils/theme";
 import StyledInput from "../../components/globalComponents/Input";
@@ -16,9 +16,8 @@ import {
 } from "./LoginStyle";
 import {login} from "../../store/login/login.action";
 import {useDispatch} from "react-redux";
-import {Link} from "../../components/Header/Nav/NavStyles";
 import {Redirect, useHistory} from "react-router-dom";
-import PublicRoute from "../PublicRoute";
+import {URL} from "../../apis/back";
 
 const Login = () => {
 
@@ -27,17 +26,13 @@ const Login = () => {
     const dispatch = useDispatch()
     const history = useHistory();
 
-    const redirect = () => {
-        history.push('/dashboard')
-    }
-
     const onFinish = (e) => {
         e.preventDefault();
-        login(dispatch, {username: (username), password: (password)});
-        setTimeout(() => {
-            if (!!localStorage.token) redirect()
-        }, 1000)
+        login(dispatch, {username: (username), password: (password)})
+            .then(() => history.push('/dashboard'))
     }
+
+
 
     return (
         <StyledLoginPage>

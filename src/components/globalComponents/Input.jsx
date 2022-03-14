@@ -52,9 +52,11 @@ const StyledInput = ({bgColor, color, placeholder, children, iconColor, border, 
     return (
         <StyledLabel marginBottom={marginBottom}>
             <StyledInpt type={type} onChange={onChange} bgColor={bgColor} color={color} placeholder={placeholder} whenFocus={whenFocus} border={border}/>
-            <StyledIcon iconColor={iconColor}>
-                {children}
-            </StyledIcon>
+            {iconColor && (
+                <StyledIcon iconColor={iconColor}>
+                    {children}
+                </StyledIcon>
+            )}
         </StyledLabel>
     )
 }
