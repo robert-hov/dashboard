@@ -10,18 +10,19 @@ import colors from "../../utils/theme";
 import {useState} from "react";
 import {editStaffList, getStaffList} from "../../store/users/users.action";
 import {useDispatch} from "react-redux";
+import {editRequest} from "../../services/EditService";
 
 const EditPopup = ({cancelClick, active}) => {
     const [firstName, setFirstName] = useState('');
     const [surname, setSurname] = useState('');
-    const [mail, setMail] = useState('')
+    const [mail, setMail] = useState('');
     const dispatch = useDispatch();
 
     const onFinish = (e) => {
         e.preventDefault();
-        console.log(firstName, surname, mail, active)
-        editStaffList(dispatch, {firstName: (firstName), lastName: (surname), email: (mail)}, active)
-        console.log(editStaffList)
+        editRequest({firstName: (firstName), lastName: (surname)}, active)
+        dispatch(getStaffList(dispatch))
+        cancelClick();
     }
 
     return (
@@ -48,6 +49,7 @@ const EditPopup = ({cancelClick, active}) => {
                                     type={'text'}
                                     marginBottom="1.375rem"
                                     whenFocus={colors.primaryBlue}
+                                    required
                                 />
                             </StyledEditLabel>
                             <StyledEditLabel labelCount="2">
@@ -67,27 +69,7 @@ const EditPopup = ({cancelClick, active}) => {
                                     type={'text'}
                                     marginBottom="1.375rem"
                                     whenFocus={colors.primaryBlue}
-                                />
-                            </StyledEditLabel>
-                        </StyledEditFormRow>
-                        <StyledEditFormRow>
-                            <StyledEditLabel>
-                                <StyledEditLabelText>
-                                    <StyledEditLabelText importantColor>
-                                        *
-                                    </StyledEditLabelText>
-                                    Email
-                                </StyledEditLabelText>
-                                <StyledInput
-                                    value={mail}
-                                    onChange={e => setMail(e.target.value)}
-                                    bgColor={colors.primaryWhite}
-                                    color={colors.primaryBlack}
-                                    placeholder={"Email"}
-                                    border={colors.primaryGray}
-                                    type={'email'}
-                                    marginBottom="1.375rem"
-                                    whenFocus={colors.primaryBlue}
+                                    required
                                 />
                             </StyledEditLabel>
                         </StyledEditFormRow>

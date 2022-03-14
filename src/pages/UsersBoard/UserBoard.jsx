@@ -16,14 +16,18 @@ const UserBoard = () => {
     const [activePopup, setActivePopup] = useState(false);
     const {staffList} = useSelector(s => s.userReducer)
     useEffect(() => {
-        dispatch(getStaffList())
+        dispatch(getStaffList(dispatch))
     }, [])
-    console.log(activeId)
+
 
     const clickHandler = (id) => {
         setActiveId(id)
         setActivePopup(true);
     }
+
+    const RendList = staffList && staffList.map((elem) => {
+        return <UserRow key={elem.id} click={clickHandler} stuff={elem && elem}/>
+    })
 
     const cancelClickHandler = () => {
         setActivePopup(false)
@@ -34,10 +38,7 @@ const UserBoard = () => {
         <div className='container'>
             <StyledUserBoard>
                 <UserRow header/>
-                {staffList &&
-                staffList.map((elem) => {
-                    return <UserRow key={elem.id} click={clickHandler} stuff={elem && elem}/>
-                })}
+                {RendList}
                 <button onClick={() => {
                     history.push('/login')
                     localStorage.clear()

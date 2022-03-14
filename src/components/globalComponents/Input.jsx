@@ -9,7 +9,8 @@ const StyledLabel = styled.label`
 `
 
 const StyledInpt = styled.input.attrs(props => ({
-    type: props.type
+    type: props.type,
+    required: props.required
 }))`
   width: 100%;
   padding-top: 0.562rem;
@@ -48,10 +49,10 @@ const StyledIcon = styled.div`
   }
 `
 
-const StyledInput = ({bgColor, color, placeholder, children, iconColor, border, type, marginBottom, whenFocus, onChange}) => {
+const StyledInput = ({bgColor, color, placeholder, children, iconColor, border, type, marginBottom, whenFocus, onChange, required}) => {
     return (
         <StyledLabel marginBottom={marginBottom}>
-            <StyledInpt type={type} onChange={onChange} bgColor={bgColor} color={color} placeholder={placeholder} whenFocus={whenFocus} border={border}/>
+            <StyledInpt type={type} onChange={onChange} bgColor={bgColor} color={color} placeholder={placeholder} whenFocus={whenFocus} border={border} required={required}/>
             {iconColor && (
                 <StyledIcon iconColor={iconColor}>
                     {children}

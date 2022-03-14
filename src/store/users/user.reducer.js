@@ -6,10 +6,15 @@ const initialState = {
 
 
 const userReducer = (state = initialState, action) => {
-    return {
-        ...state,
-        staffList: action.staffList,
+    switch(action.type) {
+        case types.SET_SW_LIST:
+            return {
+                ...state,
+                staffList: action.staffList,
+            }
+        default: return state
     }
+
 }
 
 export default userReducer;
